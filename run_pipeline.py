@@ -14,6 +14,7 @@ from models.model import get_model
 from scripts.train import train
 from scripts.evaluate import evaluate
 from scripts.predict import test
+from scripts.identify import main as identify_main
 
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
@@ -29,6 +30,9 @@ def run_pipeline():
     phoneme_list = [4]
     g_flag = "F" if gender == "female" else "M"
 
+    # number of repeated experiments for each phoneme and AM pair
+    num_experiments = 10
+
     for k in phoneme_list:
         for j in am_list:
             # if k == 4 and j in [89, 13, 88, 51, 14]:
@@ -39,7 +43,7 @@ def run_pipeline():
             folder_name = f"estimations/{g_flag}_phoneme{phoneme_idx}_AM{am_idx}"
             os.makedirs(folder_name, exist_ok=True)  # Create the directory if it doesn't exist
 
-            for x in range(2):
+            for x in range(num_experiments):
                 # Dataset and DataLoader setup
                 config = {'epochs': 10, 'learning_rate': 0.001, 'batch_size': 32}
                 train_data = AudioDataset(default_root_path, am_path, gender, phoneme_idx, am_idx, MAX_LEN=32, partition="train")
@@ -56,7 +60,7 @@ def run_pipeline():
                     target_am = target_am.to(device) 
                     all_am = target_am if all_am is None else torch.cat([all_am, target_am])
 
-                with open(f"{folder_name}/{folder_name.split('/')[-1]}_times{x}.txt", "a+") as f:
+                with open(f"{folder_name}/{folder_name.split('/')[-1]}.txt", "a+") as f:
                     f.write(f'{phoneme_idx},{am_idx},{all_am.mean().item()}\n')
 
                 # Train, Evaluate and Predict
@@ -97,10 +101,13 @@ def run_pipeline():
                 predictions, ground_truth = test(model, test_loader)
 
                 # Save predictions to a CSV file
-                with open(f"{folder_name}/{folder_name.split('/')[-1]}_predictions_times{x}.csv", "w+") as f:
+                with open(f"{folder_name}/{folder_name.split('/')[-1]}_times{x}.csv", "w+") as f:
                     f.write("person, label, prediction\n")
                     for i in range(len(predictions)):
                         f.write(f"{i},{ground_truth[i]},{predictions[i]}\n")
+
+     # Call the main function from identify.py at the end of the pipeline
+    identify_main(num_experiments)
 
 if __name__ == '__main__':
     run_pipeline()
