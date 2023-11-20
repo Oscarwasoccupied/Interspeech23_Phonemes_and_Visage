@@ -89,4 +89,4 @@ class AudioDataset(torch.utils.data.Dataset):
         ##################################################################
         target_am = torch.tensor(target_am).to(torch.float32)
         
-        return phoneme, target_am
+        return (phoneme, target_am)
