@@ -10,7 +10,7 @@ def test_dataloader():
     am_path = os.path.expanduser('~/Documents/Workspace/11785 project/penstate_data/AMs_final.csv')
     gender = 'female'
     phoneme_idx = 4
-    am_idx = 13
+    am_idx = 52
     MAX_LEN = 32
     partition = "train"
 
@@ -24,6 +24,7 @@ def test_dataloader():
     for i, (inputs, targets) in enumerate(dataloader):
         print(f"Batch {i+1}")
         print(f"Inputs shape: {inputs.shape}")
+        print(f"Targets shape: {targets.shape}")
         print(f"Targets: {targets}")
         # Here you could also add the code to send inputs to your model, etc.
         # but for simple testing, printing the shapes and targets is often enough.
