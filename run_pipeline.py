@@ -9,7 +9,7 @@ from pathlib import Path
 # Add the project directory to the Python path for relative imports
 sys.path.append(str(Path(__file__).resolve().parent))
 
-from data.dataloader import AudioDataset
+from utils.dataloader import AudioDataset 
 from models.model import get_model
 from scripts.train import train
 from scripts.evaluate import evaluate

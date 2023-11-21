@@ -8,7 +8,7 @@ from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score
 sys.path.append(str(Path(__file__).resolve().parent.parent))
 
 from models.model import get_model  # Adjust the import path as necessary
-from data.dataloader import AudioDataset  # Adjust the import path as necessary
+from utils.dataloader import AudioDataset   # Adjust the import path as necessary
 from torch.utils.data import DataLoader
 import os
 

@@ -12,7 +12,7 @@ sys.path.append(str(Path(__file__).resolve().parent.parent))
 from models.model import get_model  # Now Python knows where to find models
 
 # from ..models.model import get_model # Replace with your actual model import
-from data.dataloader import AudioDataset  # Replace with your actual dataset import
+from utils.dataloader import AudioDataset 
 from torch.utils.data import DataLoader
 from torch.optim import Adam
 import torch.nn as nn
