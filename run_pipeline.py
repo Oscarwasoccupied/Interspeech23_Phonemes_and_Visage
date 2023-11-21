@@ -26,6 +26,7 @@ def run_pipeline():
 
     # am_list = [89, 13, 88, 51, 14, 52, 58, 17, 59, 73, 71, 22, 15, 69, 70, 96, 42, 7, 37, 31]
     # phoneme_list = [37]
+    # phoneme_list = [4, 6, 17, 26, 33, 7, 21, 12, 27, 5, 14, 44, 49, 22, 23, 11, 8, 13, 18, 30]
     am_list = [88]
     phoneme_list = [4]
     g_flag = "F" if gender == "female" else "M"
