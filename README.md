@@ -24,7 +24,7 @@ Before installing the project, please ensure your system meets the following req
 - PyTorch >= 1.12.0 (version 1.12.1 recommended)
 - CUDA Version >= 11 (version 11.6 recommended)
 - Numpy Version >= 1.23.0
-- Pandas Version >= 2.1.0 (version 2.1.3 recommended)
+- Pandas Version >= 2.1.0
 
 To install and set up your development environment, follow the steps below:
 
